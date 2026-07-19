@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #2E7D32;
+  --color-secondary: #4CAF50;
+  --color-cream: #FFF8E8;
+  --color-beige: #F5F0E6;
+  --color-dark: #263238;
+  --color-accent: #FFC857;
+
+  --font-display: "Fraunces", serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-dark);
+  font-family: var(--font-body);
+}
+
+/* Signature "leaf" shape used on cards, buttons, inputs across the whole app */
+.leaf-shape {
+  border-radius: 2.5rem 2.5rem 2.5rem 0.5rem;
+}
+.leaf-shape-sm {
+  border-radius: 1.25rem 1.25rem 1.25rem 0.3rem;
+}
+
+/* Glassmorphism used on floating cards */
+.glass {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.glass-dark {
+  background: rgba(38, 50, 56, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: #2E7D32; border-radius: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
