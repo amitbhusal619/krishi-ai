@@ -38,6 +38,21 @@ export function DataTable({
                     <Badge tone={statusTone[String(row[col.key])] ?? "dark"}>
                       {row[col.key]}
                     </Badge>
+                  ) : col.key === "name" && row.image ? (
+                    <div className="flex items-center gap-3">
+                      {String(row.image).startsWith("/") || String(row.image).startsWith("http") ? (
+                        <img
+                          src={String(row.image)}
+                          alt={String(row.name)}
+                          className="h-10 w-10 rounded-xl object-cover shadow-sm shrink-0 border border-dark/5"
+                        />
+                      ) : (
+                        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/10 text-lg shrink-0">
+                          {row.image}
+                        </span>
+                      )}
+                      <span className="font-medium text-dark">{row[col.key]}</span>
+                    </div>
                   ) : (
                     row[col.key]
                   )}

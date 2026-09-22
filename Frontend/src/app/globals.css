@@ -45,3 +45,24 @@ body {
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-thumb { background: #2E7D32; border-radius: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
+
+.card-gradient {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(46, 125, 50, 0.12), rgba(76, 175, 80, 0.08) 30%, transparent 100%);
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  opacity: 0;
+}
+
+.card-gradient:hover::before {
+  transform: translateY(0);
+  opacity: 1;
+}

@@ -50,7 +50,11 @@ export default function CartPage() {
             cartItems.map((item) => (
               <div key={item.id} className="leaf-shape-sm flex items-center justify-between border border-dark/5 bg-white/70 px-5 py-4">
                 <div className="flex items-center gap-4">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary/10 text-2xl">{item.image}</span>
+                  {item.image && (item.image.startsWith("/") || item.image.startsWith("http")) ? (
+                    <img src={item.image} alt={item.name} className="h-12 w-12 rounded-xl object-cover shadow-sm shrink-0" />
+                  ) : (
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary/10 text-2xl shrink-0">{item.image}</span>
+                  )}
                   <div>
                     <p className="text-sm font-medium text-dark">{item.name}</p>
                     <p className="text-xs text-dark/50">Qty: {item.qty} {item.unit}</p>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { MessageCircle, X, Send, Sprout } from "lucide-react";
-import { sendChatMessage } from "@/lib/api";
+import { getAuthStatus, sendChatMessage } from "@/lib/api";
 
 const starterPrompts = [
   "My tomato leaves are yellow",
@@ -13,7 +13,7 @@ const starterPrompts = [
 export function FloatingChatbot() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<{ from: "bot" | "user"; text: string }[]>([
-    { from: "bot", text: "Namaste! I'm the Krishi AI assistant. Ask me about crops, prices, or weather." },
+    { from: "bot", text: "Namaste! I'm the HAMRO KRISHI SEWA assistant. Ask me about crops, prices, or weather." },
   ]);
   const [input, setInput] = useState("");
 
@@ -28,6 +28,7 @@ export function FloatingChatbot() {
     setInput("");
 
     try {
+      await getAuthStatus();
       const response = await sendChatMessage(trimmed);
       const botReply = response.messages?.slice(-1)[0]?.message ?? "I’m here to help with farming questions.";
       setMessages((m) => [

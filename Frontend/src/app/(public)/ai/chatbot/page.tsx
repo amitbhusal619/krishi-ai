@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Send, Sprout, User } from "lucide-react";
-import { sendChatMessage } from "@/lib/api";
+import { getAuthStatus, sendChatMessage } from "@/lib/api";
 
 export default function ChatbotPage() {
   const [messages, setMessages] = useState([
@@ -20,6 +20,7 @@ export default function ChatbotPage() {
     setInput("");
 
     try {
+      await getAuthStatus();
       const response = await sendChatMessage(text);
       const botReply = response.messages?.slice(-1)[0]?.message ?? "I’m here to help with farming questions.";
       setMessages((m) => [
@@ -38,7 +39,7 @@ export default function ChatbotPage() {
     <section className="px-6 py-16 md:px-12">
       <div className="mx-auto flex h-[70vh] max-w-2xl flex-col">
         <span className="font-mono text-xs tracking-wide text-primary">AI CHATBOT</span>
-        <h1 className="mt-3 font-display text-3xl text-dark">Ask Krishi AI</h1>
+        <h1 className="mt-3 font-display text-3xl text-dark">Ask HAMRO KRISHI SEWA</h1>
 
         <div className="leaf-shape mt-6 flex flex-1 flex-col border border-dark/5 bg-white/70 p-5">
           <div className="flex-1 space-y-4 overflow-y-auto pr-1">

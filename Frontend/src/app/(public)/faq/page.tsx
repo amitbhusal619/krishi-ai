@@ -1,5 +1,5 @@
 const faqs = [
-  { q: "Is Krishi AI free for farmers?", a: "Yes, listing crops and using the core AI tools is free. A Pro plan adds priority placement and advanced analytics." },
+  { q: "Is HAMRO KRISHI SEWA free for farmers?", a: "Yes, listing crops and using the core AI tools is free. A Pro plan adds priority placement and advanced analytics." },
   { q: "How does disease detection work?", a: "Upload a photo of the affected leaf. Our model, trained on the PlantVillage dataset, returns a diagnosis, confidence score, and treatment plan." },
   { q: "How accurate are price predictions?", a: "Predictions combine historical mandi prices with seasonal trends using an LSTM model, and are updated daily." },
   { q: "Can buyers order in bulk?", a: "Yes, the Buyer/Business plan includes bulk ordering, verified supplier badges, and API access." },

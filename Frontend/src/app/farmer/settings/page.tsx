@@ -10,7 +10,7 @@ const toggles = [
 export default function FarmerSettingsPage() {
   return (
     <>
-      <PageHeader title="Settings" description="Manage how Krishi AI communicates with you." />
+      <PageHeader title="Settings" description="Manage how HAMRO KRISHI SEWA communicates with you." />
       <Card className="max-w-2xl divide-y divide-dark/5">
         {toggles.map((t) => (
           <div key={t.label} className="flex items-center justify-between py-4 first:pt-0 last:pb-0">

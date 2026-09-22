@@ -16,7 +16,7 @@ export default function AboutPage() {
           Built in the field, not in a boardroom.
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-dark/60">
-          Krishi AI started with a simple observation: farmers grow the food,
+          HAMRO KRISHI SEWA started with a simple observation: farmers grow the food,
           but rarely capture the value. We&apos;re building the tools to change that —
           fair marketplace access, AI diagnostics, and honest price data, in one place.
         </p>

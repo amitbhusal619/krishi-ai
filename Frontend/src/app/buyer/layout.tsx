@@ -1,10 +1,11 @@
 "use client";
 
 import { DashboardShell, type NavItem } from "@/components/shared/dashboard-shell";
-import { LayoutDashboard, Heart, ShoppingCart, Package, CreditCard, User } from "lucide-react";
+import { LayoutDashboard, Heart, ShoppingCart, Package, CreditCard, User, MessageSquare } from "lucide-react";
 
 const navItems: NavItem[] = [
   { href: "/buyer/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/buyer/krishi-assistant", label: "Krishi Assistant", icon: MessageSquare },
   { href: "/buyer/wishlist", label: "Wishlist", icon: Heart },
   { href: "/buyer/orders", label: "Orders", icon: Package },
   { href: "/buyer/cart", label: "Cart", icon: ShoppingCart },

@@ -3,6 +3,7 @@
 import { DashboardShell, type NavItem } from "@/components/shared/dashboard-shell";
 import {
   LayoutDashboard,
+  MessageSquare,
   Package,
   ShoppingCart,
   BarChart3,
@@ -14,6 +15,7 @@ import {
 
 const navItems: NavItem[] = [
   { href: "/farmer/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/farmer/krishi-assistant", label: "Krishi Assistant", icon: MessageSquare },
   { href: "/farmer/products", label: "My Products", icon: Package },
   { href: "/farmer/orders", label: "Orders", icon: ShoppingCart },
   { href: "/farmer/analytics", label: "Analytics", icon: BarChart3 },

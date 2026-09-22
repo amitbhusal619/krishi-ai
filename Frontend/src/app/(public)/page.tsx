@@ -1,4 +1,8 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useLanguage } from "@/lib/i18n";
 import {
   Sprout,
   Camera,
@@ -14,7 +18,9 @@ import { StatCounter } from "@/components/shared/stat-counter";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { products, trendingPrices, testimonials } from "@/data/mock";
+import { Card } from "@/components/ui/card";
+import { trendingPrices, testimonials } from "@/data/mock";
+import { getProducts, ApiProduct } from "@/lib/api";
 
 const categories = ["Vegetables", "Grains", "Fruits", "Spices", "Dairy", "Seeds"];
 
@@ -26,12 +32,31 @@ const aiFeatures = [
 ];
 
 const faqs = [
-  { q: "Is Krishi AI free for farmers?", a: "Yes, listing your crops and using core AI tools is free for all registered farmers." },
+  { q: "Is HAMRO KRISHI SEWA free for farmers?", a: "Yes, listing your crops and using core AI tools is free for all registered farmers." },
   { q: "Which languages are supported?", a: "The platform works in both Nepali and English, switchable from the navbar." },
-  { q: "How accurate is the disease detection?", a: "Our model is trained on the PlantVillage dataset and regional crop images, and keeps improving with more submissions." },
+  { q: "How accurate is the disease detection?", a: "Our model is trained on PlantVillage datasets and regional crop images, continuously improving." },
 ];
 
 export default function HomePage() {
+  const [realProducts, setRealProducts] = useState<ApiProduct[]>([]);
+  const [loadingProducts, setLoadingProducts] = useState(true);
+  const { t } = useLanguage();
+
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        const data = await getProducts();
+        setRealProducts(data || []);
+      } catch (err) {
+        console.error("Failed to load homepage products:", err);
+      } finally {
+        setLoadingProducts(false);
+      }
+    }
+
+    loadProducts();
+  }, []);
+
   return (
     <>
       <Hero />
@@ -39,10 +64,10 @@ export default function HomePage() {
       {/* Trust stats */}
       <section className="border-y border-dark/5 bg-white/40 px-6 py-10 md:px-12">
         <div className="mx-auto grid max-w-4xl grid-cols-2 gap-8 md:grid-cols-4">
-          <StatCounter value="12,400+" label="Happy farmers" />
-          <StatCounter value="Rs 4.2Cr" label="Traded this month" />
-          <StatCounter value="86%" label="Disease detection accuracy" />
-          <StatCounter value="77" label="Districts covered" />
+          <StatCounter value="Direct" label="Farmer Marketplace" />
+          <StatCounter value="Live" label="Market Prices" />
+          <StatCounter value="AI Powered" label="Crop Diagnosis" />
+          <StatCounter value="Verified" label="Quality Produce" />
         </div>
       </section>
 
@@ -91,11 +116,34 @@ export default function HomePage() {
               View all <ArrowRight className="h-4 w-4" />
             </Button>
           </div>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {products.slice(0, 6).map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
-          </div>
+          {loadingProducts ? (
+            <Card className="mt-10 p-8 text-center text-sm text-dark/50">Loading produce...</Card>
+          ) : realProducts.length > 0 ? (
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {realProducts.slice(0, 6).map((p) => {
+                const farmerName = typeof p.farmer === "object" ? (p.farmer.first_name || p.farmer.username) : "Farmer";
+                return (
+                  <ProductCard
+                    key={p.id}
+                    product={{
+                      id: p.id,
+                      name: p.name,
+                      farmer: farmerName,
+                      location: p.location || "Nepal",
+                      price: Number(p.price),
+                      unit: p.unit,
+                      rating: 5.0,
+                      image: p.image || "🌾",
+                    }}
+                  />
+                );
+              })}
+            </div>
+          ) : (
+            <Card className="mt-10 p-12 text-center text-sm text-dark/50">
+              No products listed in marketplace yet. Registered farmers can list their produce to start selling!
+            </Card>
+          )}
         </div>
       </section>
 

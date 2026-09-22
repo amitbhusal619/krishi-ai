@@ -40,7 +40,7 @@ export function SiteFooter() {
             <span className="leaf-shape-sm flex h-8 w-8 items-center justify-center bg-primary text-cream">
               <Leaf className="h-4 w-4" />
             </span>
-            Krishi AI
+            HAMRO KRISHI SEWA
           </Link>
           <p className="mt-4 max-w-xs text-sm text-dark/60">
             One platform. Everything for farmers. Sell smarter with AI-powered
@@ -67,7 +67,7 @@ export function SiteFooter() {
       </div>
 
       <div className="mx-auto mt-12 flex max-w-6xl flex-col items-center justify-between gap-4 border-t border-dark/10 pt-6 text-xs text-dark/40 md:flex-row">
-        <span>© 2026 Krishi AI. Built for farmers, by design.</span>
+        <span>© 2026 HAMRO KRISHI SEWA. Built for farmers, by design.</span>
         <span>Nepalgunj · Butwal · Chitwan · Kaski</span>
       </div>
     </footer>

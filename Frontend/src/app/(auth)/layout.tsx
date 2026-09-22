@@ -12,7 +12,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <span className="leaf-shape-sm flex h-8 w-8 items-center justify-center bg-primary text-cream">
             <Leaf className="h-4 w-4" />
           </span>
-          Krishi AI
+          HAMRO KRISHI SEWA
         </Link>
         <div className="glass leaf-shape p-8 shadow-xl shadow-primary/10">{children}</div>
       </div>

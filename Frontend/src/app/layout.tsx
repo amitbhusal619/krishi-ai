@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { LanguageProvider } from "@/lib/i18n";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -21,7 +22,7 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Krishi AI | Grow Smarter. Sell Faster. Earn Better.",
+  title: "HAMRO KRISHI SEWA | Grow Smarter. Sell Faster. Earn Better.",
   description: "One platform. Everything for farmers.",
 };
 
@@ -35,7 +36,7 @@ export default function RootLayout({
       <body
         className={`${fraunces.variable} ${jakarta.variable} ${mono.variable} antialiased`}
       >
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

@@ -10,7 +10,8 @@ export function Card({
   return (
     <div
       className={cn(
-        "leaf-shape border border-dark/5 bg-white/70 p-6 shadow-sm shadow-dark/5",
+        "card-gradient leaf-shape border border-dark/5 bg-white/80 p-6 shadow-sm shadow-dark/5 transition duration-300 ease-out",
+        "hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/15",
         className
       )}
     >

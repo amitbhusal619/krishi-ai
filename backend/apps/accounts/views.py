@@ -181,3 +181,18 @@ class MeView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
+
+
+class UserListView(generics.ListAPIView):
+    """GET /api/auth/users/ — Admin only list of registered users."""
+
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        role = self.request.query_params.get("role")
+        qs = User.objects.all().order_by("-date_joined")
+        if role:
+            qs = qs.filter(role__iexact=role)
+        return qs
+

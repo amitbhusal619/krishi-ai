@@ -1,10 +1,45 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { Search, SlidersHorizontal } from "lucide-react";
 import { ProductCard } from "@/components/shared/product-card";
-import { products } from "@/data/mock";
+import { Card } from "@/components/ui/card";
+import { getProducts, ApiProduct } from "@/lib/api";
 
 const categories = ["All", "Vegetables", "Grains", "Fruits", "Spices"];
 
 export default function MarketplacePage() {
+  const [products, setProducts] = useState<ApiProduct[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [selectedCat, setSelectedCat] = useState("All");
+
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        const data = await getProducts();
+        setProducts(data || []);
+      } catch (err) {
+        console.error("Failed to load marketplace products:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadProducts();
+  }, []);
+
+  const filteredProducts = products.filter((p) => {
+    const matchesSearch =
+      p.name.toLowerCase().includes(search.toLowerCase()) ||
+      p.location.toLowerCase().includes(search.toLowerCase());
+    const matchesCat =
+      selectedCat === "All" ||
+      (typeof p.category === "object" ? p.category.name : "") === selectedCat;
+
+    return matchesSearch && matchesCat;
+  });
+
   return (
     <section className="px-6 py-16 md:px-12">
       <div className="mx-auto max-w-6xl">
@@ -22,6 +57,8 @@ export default function MarketplacePage() {
             <input
               type="text"
               placeholder="Search crops, farmers, locations..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               className="w-full bg-transparent py-2 text-sm outline-none placeholder:text-dark/40"
             />
           </div>
@@ -31,11 +68,12 @@ export default function MarketplacePage() {
         </div>
 
         <div className="mt-6 flex flex-wrap gap-2">
-          {categories.map((cat, i) => (
+          {categories.map((cat) => (
             <button
               key={cat}
+              onClick={() => setSelectedCat(cat)}
               className={`rounded-full px-4 py-2 text-xs font-medium transition ${
-                i === 0
+                selectedCat === cat
                   ? "bg-primary text-cream"
                   : "border border-dark/10 text-dark/60 hover:bg-dark/5"
               }`}
@@ -45,11 +83,36 @@ export default function MarketplacePage() {
           ))}
         </div>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
+        {loading ? (
+          <Card className="mt-10 p-12 text-center text-sm text-dark/50">
+            Loading marketplace products...
+          </Card>
+        ) : filteredProducts.length > 0 ? (
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredProducts.map((p) => {
+              const farmerName = typeof p.farmer === "object" ? (p.farmer.first_name || p.farmer.username) : "Farmer";
+              return (
+                <ProductCard
+                  key={p.id}
+                  product={{
+                    id: p.id,
+                    name: p.name,
+                    farmer: farmerName,
+                    location: p.location || "Nepal",
+                    price: Number(p.price),
+                    unit: p.unit,
+                    rating: 5.0,
+                    image: p.image || "🌾",
+                  }}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <Card className="mt-10 p-12 text-center text-sm text-dark/50">
+            No produce available in the marketplace matching your criteria.
+          </Card>
+        )}
       </div>
     </section>
   );

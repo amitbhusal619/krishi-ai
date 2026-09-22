@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { loginUser } from "@/lib/api";
+import { Eye, EyeOff } from "lucide-react";
 
 type UserPayload = {
   role?: string;
@@ -14,6 +15,7 @@ export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,6 +39,8 @@ export default function LoginPage() {
         router.push("/farmer/dashboard");
       } else if (role === "buyer") {
         router.push("/buyer/dashboard");
+      } else if (role === "admin") {
+        router.push("/admin/dashboard");
       } else {
         router.push("/");
       }
@@ -51,7 +55,7 @@ export default function LoginPage() {
   return (
     <>
       <h1 className="text-center font-display text-2xl text-dark">Welcome back</h1>
-      <p className="mt-1 text-center text-sm text-dark/50">Log in to your Krishi AI account</p>
+      <p className="mt-1 text-center text-sm text-dark/50">Log in to your HAMRO KRISHI SEWA account</p>
 
       <form onSubmit={handleSubmit} className="mt-8 space-y-4">
         <div>
@@ -70,14 +74,24 @@ export default function LoginPage() {
             <label className="text-xs text-dark/50">Password</label>
             <Link href="/forgot-password" className="text-xs text-primary">Forgot?</Link>
           </div>
-          <input
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            required
-            className="leaf-shape-sm mt-1 w-full border border-dark/10 bg-white/80 px-4 py-3 text-sm outline-none"
-            placeholder="••••••••"
-          />
+          <div className="relative mt-1">
+            <input
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              required
+              className="leaf-shape-sm w-full border border-dark/10 bg-white/80 pl-4 pr-10 py-3 text-sm outline-none"
+              placeholder="••••••••"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-dark/50 hover:text-dark focus:outline-none"
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>
+          </div>
         </div>
 
         {error ? <p className="text-sm text-red-600">{error}</p> : null}
@@ -94,3 +108,4 @@ export default function LoginPage() {
     </>
   );
 }
+

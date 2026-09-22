@@ -1,10 +1,10 @@
 export const products = [
-  { id: 1, name: "Fresh Tomato", farmer: "Ram Bahadur", location: "Nepalgunj", price: 68, unit: "kg", rating: 4.8, image: "🍅" },
-  { id: 2, name: "Organic Maize", farmer: "Sita Thapa", location: "Butwal", price: 42, unit: "kg", rating: 4.6, image: "🌽" },
-  { id: 3, name: "Basmati Rice", farmer: "Krishna Oli", location: "Chitwan", price: 120, unit: "kg", rating: 4.9, image: "🌾" },
-  { id: 4, name: "Farm Potato", farmer: "Gita Rai", location: "Kaski", price: 35, unit: "kg", rating: 4.5, image: "🥔" },
-  { id: 5, name: "Green Chili", farmer: "Hari Gurung", location: "Dang", price: 90, unit: "kg", rating: 4.7, image: "🌶️" },
-  { id: 6, name: "Cauliflower", farmer: "Maya Karki", location: "Banke", price: 55, unit: "kg", rating: 4.4, image: "🥦" },
+  { id: 1, name: "Fresh Tomato", farmer: "Ram Bahadur", location: "Nepalgunj", price: 68, unit: "kg", rating: 4.8, image: "/images/products/tomato.jpg" },
+  { id: 2, name: "Organic Maize", farmer: "Sita Thapa", location: "Butwal", price: 42, unit: "kg", rating: 4.6, image: "/images/products/maize.jpg" },
+  { id: 3, name: "Basmati Rice", farmer: "Krishna Oli", location: "Chitwan", price: 120, unit: "kg", rating: 4.9, image: "/images/products/rice.jpg" },
+  { id: 4, name: "Farm Potato", farmer: "Gita Rai", location: "Kaski", price: 35, unit: "kg", rating: 4.5, image: "/images/products/potato.jpg" },
+  { id: 5, name: "Green Chili", farmer: "Hari Gurung", location: "Dang", price: 90, unit: "kg", rating: 4.7, image: "/images/products/chili.jpg" },
+  { id: 6, name: "Cauliflower", farmer: "Maya Karki", location: "Banke", price: 55, unit: "kg", rating: 4.4, image: "/images/products/cauliflower.jpg" },
 ];
 
 export const trendingPrices = [
